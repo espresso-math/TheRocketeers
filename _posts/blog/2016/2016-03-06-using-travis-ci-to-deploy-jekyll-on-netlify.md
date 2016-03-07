@@ -79,6 +79,12 @@ branches:
   - master
 ```
 
+Now create a file named `tests.rb` in the root of your repository with the following code.
+
+```
+puts "Captain! I'm fine!"
+```
+
 #### Step 2
 
 Make a new [Travis CI](https://travis-ci.org) and connect it to your Github account. Follow the instructions to activate your repository and push to Github for your first build. The build will fail, don't worry. In your Travis CI dashboard you can find the More Options button to your right. The settings for your repository will be there. In your settings page you have the option to add new environment variables. Setting up an environment variable enable you to access that variable in your bash script. Before you create an environmental variable you must create a Netlify personal access token for yourself. You can get the personal access token from [here](https://app.netlify.com/applications). Make sure to keep it safe. !!!Not in your repository!!!
