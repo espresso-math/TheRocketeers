@@ -25,7 +25,6 @@ gems:
   - jekyll-sitemap
   - jekyll-redirect-from
   - jekyll-gist
-  - jekyll-press
 
 
 kramdown:
