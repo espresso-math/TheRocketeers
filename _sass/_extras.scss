@@ -1,0 +1,289 @@
+// Printability
+// --------------------------------------------------
+@media print {
+  .no-print {
+    display:none;
+  }
+  h1, h2, h3, h4, h5 {
+    page-break-after: avoid;
+  }
+  table, figure, p {
+    page-break-inside: avoid;
+  }
+}
+
+// Visibility (Scroll Effects)
+// --------------------------------------------------
+.invisible {
+	opacity: 0;
+}
+
+.visible {
+	opacity: 1;
+}
+
+// First paragraph letter
+// --------------------------------------------------
+.dcap {
+	color: #000; 
+	display: block; 
+	float: left; 
+	font-family:  $cap-font;
+	font-size: 75px; 
+	font-weight: 400;
+	height: 60px; 
+	line-height: 75px; 
+}
+
+// Central quote
+// --------------------------------------------------
+div .central-quote {
+    background:
+        url(/images/divider-top.png) top center no-repeat,
+        url(/images/divider-bottom.png) bottom center no-repeat;
+    background-size: contain;
+    color: #222;
+    font-family:  $quote-font;
+    font-style: italic;	
+    line-height: 1.2em; 
+	padding: 30px 30px 40px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    @include font-size(22,yes,22);
+    @include media($medium) {
+	    @include font-size(24,yes,24);
+		max-width: 80%;
+    }
+    @include media($large) {
+        @include font-size(26,yes,26);
+		max-width: 70%;
+    }
+}
+
+// Text divider
+// --------------------------------------------------
+div .text-divider {
+    background: url(/images/divider-text.png) center no-repeat;
+    background-size: contain;
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 25px;
+	max-width: 40%;
+} 
+
+// Center alignment
+// --------------------------------------------------
+// check also helpers.sass for pull-left, pull-right
+iframe, img {
+    &.center {
+        display:block;
+        margin-left: auto;
+        margin-right: auto;        
+    }
+}
+
+// TODO: for the moment force all iframes to center. 
+//  Later, update all posts to use .center class.
+iframe {
+    display:block;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+// Social share
+// --------------------------------------------------
+.social-share {
+	$social: 
+        (facebook, $facebook-color),
+		(flickr, $flickr-color),
+		(foursquare, $foursquare-color),
+		(google-plus, $google-plus-color),
+		(instagram, $instagram-color),
+		(linkedin, $linkedin-color),
+		(pinterest, $pinterest-color),
+		(rss, $rss-color),
+		(tumblr, $tumblr-color),
+		(twitter, $twitter-color),
+		(vimeo, $vimeo-color),
+		(youtube, $youtube-color);
+    outline: none !important;
+	color: $link-color;
+	&:hover {
+        @each $socialnetwork, $color in $social {
+            i.fa-#{$socialnetwork} {
+                color: $color;
+            } 
+        }
+	}
+}
+
+// PREVIEWS-NEXT POST
+// --------------------------------------------------
+.next-prev a {
+	background: $body-color;
+	color: $text-color;
+	border: 1px solid black;
+	padding: 10px;
+	font-size: 14px;
+	font-family:  $alt-font; 
+	text-transform: uppercase;
+	font-weight: 400;
+	letter-spacing: 1px;
+	@include media($micro) {
+		display: none;
+	}
+}
+
+.next-prev a:hover {
+	color: $white;
+	background: $black;
+}
+
+.next-post a {
+	position: fixed;
+	z-index: 20;
+	right: -112px;
+	top: 50%;
+	padding-right: 20px;
+	padding-left: 32px;
+	-webkit-transition: .1s ease-in;  
+	-moz-transition: .1s ease-in;  
+	-o-transition: .1s ease-in;  
+	transition: .1s ease-in; 
+}
+
+.next-post a:hover {
+	right: 0px;
+	-webkit-transition: .2s ease-in;  
+	-moz-transition: .2s ease-in;  
+	-o-transition: .2s ease-in;  
+	transition: .2s ease-in; 
+}
+
+.next-post a:after {
+	position: absolute;
+	content: "\f105";
+	left: 10px;
+	top: 1px;
+	font-size: 25px;
+	font-family: 'FontAwesome';
+    -webkit-font-smoothing: antialiased;
+}
+
+.prev-post a {
+	position: fixed;
+	z-index: 20;
+	left: -150px;
+	top: 50%;
+	padding-left: 20px;
+	padding-right: 35px;
+	-webkit-transition: .1s ease-in;  
+	-moz-transition: .1s ease-in;  
+	-o-transition: .1s ease-in;  
+	transition: .1s ease-in; 
+}
+
+.prev-post a:hover {
+	left: 0;
+	-webkit-transition: .2s ease-in;  
+	-moz-transition: .2s ease-in;  
+	-o-transition: .2s ease-in;  
+	transition: .2s ease-in; 
+}
+
+.prev-post a:after {
+	position: absolute;
+	content: "\f104";
+	right: 8px;
+	top: 1px;
+	font-size: 25px;
+	font-family: 'FontAwesome';
+    -webkit-font-smoothing: antialiased;
+}
+
+// Back to top
+// --------------------------------------------------
+#back-top {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    margin-right: 8px;
+    outline: none !important;
+}
+
+#back-top a {
+    display: block;
+    text-decoration: none;
+    color: $navarrows-color;
+    outline: none !important;
+}
+#back-top a:hover {
+	color: $black;
+}
+
+// Twitter timeline
+// --------------------------------------------------
+
+a.twitter-timeline {
+	font-family: $base-font !important;
+}
+
+// Boxed Figure
+// Captions appear when hovering mouse
+// --------------------------------------------------
+.boxed {
+	cursor: pointer;
+	//float: left;
+	position: relative;
+	overflow: hidden;
+	height: 500px;
+	width: 500px;
+	margin: auto;
+}
+.boxed img {
+	position: absolute;
+	left: 0;
+	border: none;
+	max-width: none;
+	-webkit-transition: all 300ms ease-out;
+	-moz-transition: all 300ms ease-out;
+    -o-transition: all 300ms ease-out;
+    -ms-transition: all 300ms ease-out;	
+	transition: all 300ms ease-out;
+}
+
+.boxed:hover img {
+	-moz-transform: scale(1.4);
+	-o-transform: scale(1.4);
+	-webkit-transform: scale(1.4);
+	transform: scale(1.4);
+}
+
+.boxed figcaption {
+	background-color: rgba(0,0,0,0.8);
+	position: absolute;
+	color: #fff;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	width: 500px;
+	height: 500px;
+	padding: 15px;
+	font-family: $quote-font;
+	font-style: italic;
+	text-align: left;
+	@include font-size(16,no,15);
+}
+
+.boxed figcaption:before {
+    content: none;
+}
+
+.boxed:hover figcaption {
+	opacity: 1;
+}
