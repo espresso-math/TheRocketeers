@@ -45,9 +45,12 @@ modified: 2014-08-08T19:44:38.564948-04:00
 
 
 #### Mirrors
-
-* Find this blog again at this [mirror](http://navigator-douglas-18745.netlify.com/).
-* Original site [here](https://therocketeers.cr.rs)
+{% if site.url == "https://therocketeers.cr.rs" %}
+* Find this blog again at this [mirror](https://therocketeers.github.io).
+{% endif %}
+{% if site.url == "https://therocketeers.github.io" %}
+* Find this blog again as this [mirror](https://therocketeers.cr.rs).
+{% endif %}
 
 #### Acknowledgment
 
