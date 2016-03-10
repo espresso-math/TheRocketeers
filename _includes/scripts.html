@@ -120,19 +120,3 @@ $( "#comments" ).click(function() {
     feed.run();
 </script>
 {% endif %}
-
-{% if page.poole %}
-<script type="text/javascript">
-  function honeyPot() {
-    document.forms["commentform"]["sessionID"].value = PAGE_URL;
-    var honey_handle = document.forms["commentform"]["honeypot"].value;
-    if (honey_handle == null || honey_handle == "") {
-      return true;
-    }
-    else {
-      alert("Caught you!");
-      return false;
-    }
-  }
-</script>
-{% endif %}

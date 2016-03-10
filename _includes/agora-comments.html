@@ -1,0 +1,171 @@
+<script type="text/javascript">
+  function honeyPot(form) {
+    form.path.value = "{{ page.url }}";
+    var honey_handle = form.honey.value;
+    if (honey_handle == null || honey_handle == '') {
+    	return true;
+    }
+    else {
+    	return false;
+    }
+  }
+  function focusOnMe(id) {
+  	document.getElementById("laform").name.focus();
+  	document.getElementById("laform").inreplyto.value = id;
+  }
+</script>
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+<style type="text/css">
+	#hide {
+		display: none;
+	}
+	.bold-style {
+		border-radius: 0 !important;
+		border-width: 1px !important;
+		padding: 20px !important;
+		border-color: #ddd !important;
+		background-color: #fafafa !important;
+		box-shadow: none !important;
+	}
+	.bold-style:focus {
+		border-color: #ddd !important;
+	}
+	.input-area {
+		height: 200px;
+	}
+	.poole label {
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		font-weight: 900;
+		font-size: 0.8em;
+	}
+
+	.button {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		padding-left: 20px;
+		padding-right: 20px;
+		margin-top: 5px;
+		color: #fff;
+		background-color: #111;
+		border-radius: 3px;
+		box-shadow: none;
+		text-transform: uppercase;
+		font-weight: 900;
+	}
+	.poole legend {
+		font-weight: 900;
+		font-size: 2em;
+	}
+	.poole-comments li {
+		list-style-type: none;
+		display: block;
+		border-top-width: 1px;
+		border-top-style: solid;
+		border-top-color: #d5d5d5;
+		margin-top: 10px;
+		padding-top: 10px;
+		margin-bottom: 10px; 
+
+	}
+	.poole-comments div {
+		font-size: 1.3em;
+	}
+	.poole-comments p {
+		font-size: 0.7em;
+		color: #555;
+		text-transform: uppercase;
+		font-weight: 700;
+		padding: 0;
+		margin: 0;
+	}
+	.poole-comments time {
+		font-size: 0.7em;
+	}
+	.poole-comments a {
+		margin-left: 15px;
+	}
+	.poole-comments > ul {
+		margin: 0;
+	}
+	.poole-comments {
+		margin-top: 40px;
+	}
+</style>
+
+
+<form class="pure-form pure-form-stacked poole" action="http://pooleapp.com/stash/ce80ef88-a97d-46f1-8565-23d6bc13e060
+/" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
+	<fieldset>
+		<legend>Leave a comment</legend>
+
+			<input type="hidden" name="redirect_to" value="{{site.url}}{{post.url}}" />
+
+			<div class="pure-g">
+
+				<div class="pure-u-1-2">
+		  		<label>Name</label>
+		  		<input type="text" name="name" class="pure-u-22-24 bold-style" > 
+		  	</div>
+
+		  	<div class="pure-u-1-2">
+		  		<label>Email</label>
+		  		<input type="text" name="email" class="pure-u-1 bold-style" >
+		  	</div>
+
+		  	<div class="pure-u-1">
+		  		<label>Website</label>
+		  		<input type="text" name="website" class="pure-u-1 bold-style">
+		  	</div>
+
+		  	<div class="pure-u-1">
+		  		<label>Comment</label>
+		  		<textarea class="pure-input-1 bold-style input-area" name="comment"></textarea>
+		  	</div>
+
+	  		<input type="text" name="path" id="hide">
+	  		<input type="text" name="inreplyto" id="hide">
+	  		<input type="text" name="honey" id="hide">
+
+	  		<input type="submit" value="Post Comment" class="pure-button button">
+
+	  	</div>
+  </fieldset>
+</form>
+
+
+
+<div class="poole-comments">
+<h3>11 Comments</h3>
+<ul>
+  {% for comment in site.data.poole.sessions %}{% if comment.path == page.url %}{% if comment.inreplyto == '' and comment.honey == '' %}
+  	
+    <li>
+      <p class="poole-name">{{ comment.name }}</p>
+      <div class="poole-comment">
+        {{ comment.comment }}
+      </div>
+      <time datetime="{{ comment.created | date_to_xmlschema }}">
+        {{ comment.created | date_to_long_string  }}
+      </time>
+      <a onclick="focusOnMe('{{comment._id}}')">Reply</a>
+
+      <ul>
+      	{% for comments in site.data.poole.sessions %}{% if comment._id == comments.inreplyto and comments.honey == ''%}
+      		
+	      	<li>
+      			<p>{{ comments.name }}</p>
+			      <div>
+			        {{ comments.comment }}
+			      </div>
+			      <time datetime="{{ comment.created | date_to_xmlschema }}">
+			        {{ comments.created | date_to_long_string  }}
+			      </time>
+      		</li>
+      	{% endif %}{% endfor %}
+      </ul>
+
+    </li>
+  {% endif %}{% endif %}{% endfor %}
+</ul>
+</div>
