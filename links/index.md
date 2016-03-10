@@ -47,6 +47,7 @@ modified: 2014-08-08T19:44:38.564948-04:00
 #### Mirrors
 
 * Find this blog again at this [mirror](http://navigator-douglas-18745.netlify.com/).
+* Original site [here](https://therocketeers.cr.rs)
 
 #### Acknowledgment
 
