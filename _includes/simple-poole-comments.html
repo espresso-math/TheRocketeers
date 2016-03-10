@@ -1,0 +1,30 @@
+<form name="commentform" action="http://pooleapp.com/stash/0978eb1b-f804-485b-b3fb-73fdc9d4aa57/" method="post" onsubmit="return honeyPot()">
+  <input type="hidden" name="redirect_to" value="{{site.url}}/{{page.url}}" />
+  <label>Session ID</label>
+  <input type="text" name="sessionID"  />
+  <label>Name:</label>
+  <input type="text" name="fname" />
+  <textarea name="fcomment"></textarea>
+  <label>Leave this one alone:</label>
+  <input type="Honey Pot" name="honeypot"/>
+  <input type="submit" value="submit" />
+</form>
+
+<div class="poole-comments">
+<ul>
+  {% for comment in site.data.poole.sessions %}
+    {% if comment.path == page.url %}
+    <li>
+      <time datetime="{{ comment.created | date_to_xmlschema }}">
+        {{ comment.created | date_to_long_string  }}
+      </time>
+      <a href="{{ site.url }}">{{ comment.fname }}</a>
+      <p>{{ comment.fname }}</p>
+      <div>
+        {{ comment.fcomment }}
+      </div>
+    </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+</div>
