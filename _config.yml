@@ -6,9 +6,9 @@ timezone: CET
 description: (I Think It's Going To Be A Long Long Time)
 logo: site-logo.svg
 search: true
-#url: https://therocketeers.cr.rs
-url: http://localhost
-dev: true
+url: https://therocketeers.cr.rs
+#url: http://localhost
+dev: false
 # common url for images and other external data  
 external_data_url: https://raw.githubusercontent.com/theHeartsRocketeers/rocketeers-image-cdn/master
 # Jekyll configuration
