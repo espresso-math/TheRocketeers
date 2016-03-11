@@ -1,6 +1,25 @@
 
-
+<script src="//crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript">
+	$(document).ready(function(){
+		$('.gravatar').each(function(i, img) {
+			
+			var email = img.alt;
+	    var hash = CryptoJS.MD5(email);
+	    var base_url = "http://www.gravatar.com/avatar/";
+	    var end_url = "?d=wavatar";
+	    var url = base_url + hash + end_url;
+	    img.src = url;
+		});
+	});
+
+	function gravOn(email) {
+    var hash = CryptoJS.MD5(email);
+    var base_url = "http://www.gravatar.com/avatar/";
+    var end_url = "?d=retro";
+    var url = base_url + hash + end_url;
+	}
 	function hideAway() {
 		document.getElementById('throw-error').style.display="none";
 	}
@@ -144,9 +163,9 @@
 </style>
 
 <div id="throw-error" onclick="hideAway()">
-[x]You must provide a name and the comment box must not be empty.
+[x]You must provide a name and a comment too.
 </div>
-<form class="pure-form pure-form-stacked poole" action="http://pooleapp.com/stash/ce80ef88-a97d-46f1-8565-23d6bc13e060/" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
+<form class="pure-form pure-form-stacked poole" action="https://pooleapp.herokuapp.com/stash/ce80ef88-a97d-46f1-8565-23d6bc13e060/" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
 	<fieldset>
 		<legend>Leave a comment <a id="reply" onclick="unfocusOnMe()">Clear reply.</a></legend>
 
@@ -192,6 +211,8 @@
   {% for comment in site.data.poole.sessions %}{% if comment.path == page.url %}{% if comment.inreplyto == '' and comment.honey == '' %}
   	
     <li>
+
+    	<img class="gravatar" alt="{{comment.email}}" scr="http">
       <p class="poole-name">{{ comment.name }}</p>
       <div class="poole-comment">
         {{ comment.comment }}
@@ -205,6 +226,8 @@
       	{% for comments in site.data.poole.sessions %}{% if comment._id == comments.inreplyto and comments.honey == ''%}
       		
 	      	<li>
+
+	      		<img class="gravatar" alt="{{commens.email}}" scr="htttp">
       			<p>{{ comments.name }}</p>
 			      <div>
 			        {{ comments.comment }}
@@ -212,6 +235,7 @@
 			      <time datetime="{{ comment.created | date_to_xmlschema }}">
 			        {{ comments.created | date_to_long_string  }}
 			      </time>
+
       		</li>
       	{% endif %}{% endfor %}
       </ul>
