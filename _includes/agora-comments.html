@@ -1,23 +1,69 @@
+
+
 <script type="text/javascript">
+	function hideAway() {
+		document.getElementById('throw-error').style.display="none";
+	}
+  function validatePooleForm(form) {
+  	var name=form.name.value;
+  	var email=form.email.value;
+  	var comment=form.comment.value;
+  	if (name != '' && comment != '') {
+  		return true;
+  	}
+  	else {
+  		document.getElementById('throw-error').style.display= "block";
+  		return false;
+  	}
+  }
   function honeyPot(form) {
     form.path.value = "{{ page.url }}";
     var honey_handle = form.honey.value;
     if (honey_handle == null || honey_handle == '') {
-    	return true;
+    	if (validatePooleForm(form)) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
     else {
+    	alert('Caught ye sucker!');
     	return false;
     }
+
   }
   function focusOnMe(id) {
   	document.getElementById("laform").name.focus();
   	document.getElementById("laform").inreplyto.value = id;
+  	document.getElementById("reply").style.display = "inline";
+  }
+  function unfocusOnMe(id) {
+  	document.getElementById("laform").inreplyto.value = "";
+  	document.getElementById("reply").style.display = "none";
   }
 </script>
-<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/pure/0.6.0/pure-min.css">
 <style type="text/css">
 	#hide {
 		display: none;
+	}
+	#reply {
+		display: none;
+		color: #FF5544;
+		font-size: 0.4em;
+	}
+	#throw-error {
+		display: none;
+		background: #FF8282;
+		border-style: solid;
+		border-width: 1px;
+		border-color: #FCB8B8;
+		padding:20px;
+		border-radius: 3px;
+		font-family: sans-serif;
+		font-weight: normal;
+		font-size: 1em;
 	}
 	.bold-style {
 		border-radius: 0 !important;
@@ -69,11 +115,13 @@
 
 	}
 	.poole-comments div {
-		font-size: 1.3em;
+		font-size: 1.1em;
+		padding: 10px;
 	}
 	.poole-comments p {
-		font-size: 0.7em;
+		font-size: 0.6em;
 		color: #555;
+		font-family: sans-serif;
 		text-transform: uppercase;
 		font-weight: 700;
 		padding: 0;
@@ -81,6 +129,8 @@
 	}
 	.poole-comments time {
 		font-size: 0.7em;
+		text-transform: uppercase;
+		font-family: sans-serif;
 	}
 	.poole-comments a {
 		margin-left: 15px;
@@ -93,13 +143,14 @@
 	}
 </style>
 
-
-<form class="pure-form pure-form-stacked poole" action="http://pooleapp.com/stash/ce80ef88-a97d-46f1-8565-23d6bc13e060
-/" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
+<div id="throw-error" onclick="hideAway()">
+[x]You must provide a name and the comment box must not be empty.
+</div>
+<form class="pure-form pure-form-stacked poole" action="http://pooleapp.com/stash/ce80ef88-a97d-46f1-8565-23d6bc13e060/" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
 	<fieldset>
-		<legend>Leave a comment</legend>
+		<legend>Leave a comment <a id="reply" onclick="unfocusOnMe()">Clear reply.</a></legend>
 
-			<input type="hidden" name="redirect_to" value="{{site.url}}{{post.url}}" />
+			<input type="hidden" name="redirect_to" value="{{site.url}}{{page.url}}">
 
 			<div class="pure-g">
 

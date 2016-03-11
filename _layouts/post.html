@@ -55,9 +55,6 @@
       </footer>
       <div class="entry-content hyphenate">
         {{ content }}
-		{% if page.pollid %} <div id="poll">{% include polls/poll-{{page.pollid}}.html %}</div> {% endif %}	
-
-      {% include twitter_api.html %}
 
       {% if page.poole %}
         {% include agora-comments.html %}
