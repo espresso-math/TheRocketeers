@@ -3,15 +3,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var comment_no = 0;
 		$('.gravatar').each(function(i, img) {
 			
 			var email = img.alt;
-	    var hash = CryptoJS.MD5(email);
-	    var base_url = "https://www.gravatar.com/avatar/";
-	    var end_url = "?d=wavatar";
-	    var url = base_url + hash + end_url;
-	    img.src = url;
+		    var hash = CryptoJS.MD5(email);
+		    var base_url = "https://www.gravatar.com/avatar/";
+		    var end_url = "?d=retro";
+		    var url = base_url + hash + end_url;
+		    img.src = url;
+
+		    comment_no = i + 1;
+
 		});
+
+		$('.counter').html(comment_no);
 	});
 	function hideAway() {
 		document.getElementById('throw-error').style.display="none";
@@ -25,6 +31,7 @@
   	}
   	else {
   		document.getElementById('throw-error').style.display= "block";
+  		$('html, body').animate({ scrollTop: $('#throw-error').offset().top }, 'slow');
   		return false;
   	}
   }
@@ -62,8 +69,10 @@
 	}
 	#reply {
 		display: none;
-		color: #FF5544;
-		font-size: 0.4em;
+		float: right;
+		color: #dd0000;
+		font-size: 0.5em;
+		font-family: sans-serif;
 	}
 	#throw-error {
 		display: none;
@@ -129,23 +138,44 @@
 	.poole-comments div {
 		font-size: 1.1em;
 		padding: 10px;
+		margin-left: 10px;
 	}
 	.poole-comments p {
-		font-size: 0.6em;
+		display: inline-block;
+		font-size: 0.54em;
 		color: #555;
 		font-family: sans-serif;
 		text-transform: uppercase;
 		font-weight: 700;
 		padding: 0;
-		margin: 0;
+		margin-left: 10px;
+		margin-top: 0;
 	}
 	.poole-comments time {
-		font-size: 0.7em;
+		display: inline-block;
+		font-size: 0.5em;
+		color: #666;
 		text-transform: uppercase;
 		font-family: sans-serif;
 	}
+	.gravatar {
+		display: inline-block;
+		vertical-align: top;
+		width: 40px;
+		height: auto;
+		border-radius: 3px;
+		border-style: solid;
+		border-width: 1px;
+		border-color: #444;
+	}
 	.poole-comments a {
+		display: inline-block;
 		margin-left: 15px;
+		font-size: 0.5em;
+		font-family: sans-serif;
+	}
+	.poole-comments a:hover {
+		text-decoration: underline;
 	}
 	.poole-comments > ul {
 		margin: 0;
@@ -153,16 +183,19 @@
 	.poole-comments {
 		margin-top: 40px;
 	}
+	.top-wrapper, .bottom-wrapper {
+		display: block;
+	}
 </style>
 
 <div id="throw-error" onclick="hideAway()">
-[x]You must provide a name and a comment too.
+You must provide a name for your comment!        <i style="float:right;" class="fa fa-times"></i>
 </div>
 <form class="pure-form pure-form-stacked poole" action="https://pooleapp.herokuapp.com/stash/ce80ef88-a97d-46f1-8565-23d6bc13e060/" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
 	<fieldset>
-		<legend>Leave a comment <a id="reply" onclick="unfocusOnMe()">Clear reply.</a></legend>
+		<legend>Leave a comment <a class="display: inline-block;" id="reply" onclick="unfocusOnMe()">Clear reply <i style="color:#111;" class="fa fa-times"></i></a></legend>
 
-			<input type="hidden" name="redirect_to" value="{{site.url}}{{page.url}}">
+			<input type="hidden" name="redirect_to" value="{{site.url}}/comment/">
 
 			<div class="pure-g">
 
@@ -199,35 +232,52 @@
 
 
 <div class="poole-comments">
-<h3>11 Comments</h3>
+<h3><span class="counter">0</span> Comments</h3>
 <ul>
   {% for comment in site.data.poole.sessions %}{% if comment.path == page.url %}{% if comment.inreplyto == '' and comment.honey == '' %}
-  	
     <li>
 
-    	<img class="gravatar" alt="{{comment.email}}" scr="http">
-      <p class="poole-name">{{ comment.name }}</p>
+      <div class="top-wrapper">
+
+	      <img class="gravatar" alt="{{comment.email}}" scr="http">
+	      <p class="poole-name">{{ comment.name }}</p>
+
+      </div>
+
       <div class="poole-comment">
         {{ comment.comment }}
       </div>
-      <time datetime="{{ comment.created | date_to_xmlschema }}">
-        {{ comment.created | date_to_long_string  }}
-      </time>
-      <a onclick="focusOnMe('{{comment._id}}')">Reply</a>
+
+      <div class="bottom-wrapper">
+
+	      <time datetime="{{ comment.created | date_to_xmlschema }}">
+	        <i style="color: #333;padding: 5px;" class="fa fa-calendar"></i>{{ comment.created | date_to_long_string  }}
+	      </time>
+	      <a onclick="focusOnMe('{{comment._id}}')">Reply</a>
+
+      </div>
 
       <ul>
       	{% for comments in site.data.poole.sessions %}{% if comment._id == comments.inreplyto and comments.honey == ''%}
       		
 	      	<li>
 
-	      		<img class="gravatar" alt="{{commens.email}}" scr="htttp">
-      			<p>{{ comments.name }}</p>
-			      <div>
-			        {{ comments.comment }}
-			      </div>
+	      		<div class="top-wrapper">
+		      		<img class="gravatar" alt="{{commens.email}}" scr="htttp">
+	      			<p class="poole-name">{{ comments.name }}</p>
+	      		</div>
+
+			    <div>
+			    	{{ comments.comment }}
+			    </div>
+			      
+			    <div class="bottom-wrapper">
+
 			      <time datetime="{{ comment.created | date_to_xmlschema }}">
-			        {{ comments.created | date_to_long_string  }}
+			        <i style="color: #333;padding: 5px;" class="fa fa-calendar"></i>{{ comment.created | date_to_long_string  }}
 			      </time>
+
+      			</div>
 
       		</li>
       	{% endif %}{% endfor %}
