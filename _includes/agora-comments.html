@@ -1,16 +1,29 @@
 
 <script src="//crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript">	
+	function randomGen () {
+		var stng = "";
+		var alphabet = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-={}[]";
+		while (stng.length < 2048) {
+			stng += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+		}
+		return stng;
+	}
+	function workHard(form) {
+		var unhash = randomGen();
+		var hash = CryptoJS.MD5(unhash);
+		form.glib.value = unhash;
+		form.glibhash.value = hash;
+	}
 	$(document).ready(function(){
 		var comment_no = 0;
 		$('.gravatar').each(function(i, img) {
 			
 			var email = img.alt;
-		    var hash = CryptoJS.MD5(email);
 		    var base_url = "https://www.gravatar.com/avatar/";
 		    var end_url = "?d=retro";
-		    var url = base_url + hash + end_url;
+		    var url = base_url + email + end_url;
 		    img.src = url;
 
 		    comment_no = i + 1;
@@ -24,9 +37,9 @@
 	}
   function validatePooleForm(form) {
   	var name=form.name.value;
-  	var email=form.email.value;
   	var comment=form.comment.value;
   	if (name != '' && comment != '') {
+  		workHard(form);
   		return true;
   	}
   	else {
@@ -37,6 +50,9 @@
   }
   function honeyPot(form) {
     form.path.value = "{{ page.url }}";
+    var email=form.email0.value;
+  	var hash = CryptoJS.MD5(email);
+  	form.email0.value = hash;
     var honey_handle = form.honey.value;
     if (honey_handle == null || honey_handle == '') {
     	if (validatePooleForm(form)) {
@@ -191,7 +207,7 @@
 <div id="throw-error" onclick="hideAway()">
 You must provide a name for your comment!        <i style="float:right;" class="fa fa-times"></i>
 </div>
-<form class="pure-form pure-form-stacked poole" action="https://pooleapp.herokuapp.com/stash/ce80ef88-a97d-46f1-8565-23d6bc13e060/" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
+<form class="pure-form pure-form-stacked poole" action="https://pooleapp.herokuapp.com/stash/a24ae7bd-789c-4d1a-9029-52143e68c798/" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
 	<fieldset>
 		<legend>Leave a comment <a class="display: inline-block;" id="reply" onclick="unfocusOnMe()">Clear reply <i style="color:#111;" class="fa fa-times"></i></a></legend>
 
@@ -222,6 +238,9 @@ You must provide a name for your comment!        <i style="float:right;" class="
 	  		<input type="text" name="path" id="hide">
 	  		<input type="text" name="inreplyto" id="hide">
 	  		<input type="text" name="honey" id="hide">
+	  		<input type="text" name="email0" id="hide">
+	  		<input type="text" name="glib" id="hide">
+	  		<input type="text" name="glibhash" id="hide">
 
 	  		<input type="submit" value="Post Comment" class="pure-button button">
 
@@ -239,7 +258,7 @@ You must provide a name for your comment!        <i style="float:right;" class="
 
       <div class="top-wrapper">
 
-	      <img class="gravatar" alt="{{comment.email}}" scr="http">
+	      <img class="gravatar" alt="{{comment.email0}}" scr="http">
 	      <p class="poole-name">{{ comment.name }}</p>
 
       </div>
@@ -263,7 +282,7 @@ You must provide a name for your comment!        <i style="float:right;" class="
 	      	<li>
 
 	      		<div class="top-wrapper">
-		      		<img class="gravatar" alt="{{commens.email}}" scr="htttp">
+		      		<img class="gravatar" alt="{{commens.email0}}" scr="htttp">
 	      			<p class="poole-name">{{ comments.name }}</p>
 	      		</div>
 
