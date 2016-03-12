@@ -14,7 +14,7 @@ One thing I've learned about the web is that if you want to get something done g
 
 ####Introducing Agora
 
-You can include the Agora comment system on your jekyll website by simply adding the following file to your `_includes` directory. Every time you'd want to use Agora go ahead and add `{% include agora-comments.html %}` to your post. It's that simple. All the javascript and css that make Agora tick is included inside the html file. Agora uses [Pooleapp.com](http://pooleapp.com) to handle form submissions. Being static the comments do not appear at once. Instead each time you rebuild and update your jekyll site the comments appear. But before you can do that read on to know how to configure Agora.
+You can include the Agora comment system on your jekyll website by simply adding the following file to your `_includes` directory. Every time you'd want to use Agora go ahead and include the `agora-comments.html` file in your post. It's that simple. All the javascript and css that make Agora tick is included inside the html file. Agora uses [Pooleapp.com](http://pooleapp.com) to handle form submissions. Being static the comments do not appear at once. Instead each time you rebuild and update your jekyll site the comments appear. But before you can do that read on to know how to configure Agora.
 
 ####Configuration
 
