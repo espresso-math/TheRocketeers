@@ -6,6 +6,7 @@ categories: [Blog]
 share: true
 excerpt: Setting up a Travis CI continuous workflow to automatically deploy my website on Netlify each time I push to Github.
 tags: ["Travis CI", "Continuous Integration", "Netlify Static Hosting", "Jekyll"]
+poole: true
 ---
 
 I recently moved my website from Github pages to Netlify. The reason I did this was because Netlify provides free static hosting through a worldwide CDN or in other words through a content delivery network. As a result my website is now blazingly fast anywhere around the world. Netlify CDN automatically optimizes my website resources so that they can be downloaded faster. Netlify is also convenient as it supports continuous integration which meant each time I made some modification and pushed to Github my site is automatically regenerated and deployed. Moving to Netlify also meant that I could use an SSL certificate with my custom domain for free. How cool is that?

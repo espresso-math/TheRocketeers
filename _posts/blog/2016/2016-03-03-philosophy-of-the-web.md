@@ -6,6 +6,7 @@ categories: [Blog]
 share: true
 excerpt: A little bit of moral value for the web.
 tags: ["Writing", "Philosophy", "Ethical Principals"]
+poole: true
 ---
 
 <span class="dcap">H</span>ere are my basic philosophy for writing on the web.

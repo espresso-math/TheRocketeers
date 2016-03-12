@@ -5,6 +5,7 @@ share: true
 date: 2016-02-23T10:30:24+00:00
 title: Those Wordpress Days
 tags: [jekyll, blogging]
+poole: true
 ---
 
 <span class="dcap">T</span>his blog is hosted on Github using Jekyll. I've blogged before using Wordpress and Ghost but never have I experienced such freedom as Jekyll offers. A long, long time ago I started a Wordpress blog at [000webhost](https://000webhost.com). I was just a script kiddie then -- a n00b -- and was innocent and dumb to the dishonesty of the web. Like most users I was drawn in by these tempting words.

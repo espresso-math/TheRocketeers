@@ -7,6 +7,7 @@ title: In the very begining - Dedekind-Peano Axioms
 date: 2016-02-22T04:05:25+00:00
 tags: [dedekind, peano, axioms, arithmetics]
 mathjax: true
+poole: true
 ---
 
 <span class="dcap">I</span>n the begining were the axioms and the axioms were with Euclid. For a long time this was the case until western mathematics was reformulated again at the end of the [century] century. Let me introduce you to the Dedekind-Peano Axioms of Arithmetics.
