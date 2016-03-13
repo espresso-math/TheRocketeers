@@ -1,10 +1,10 @@
 
-<script src="//crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
+<script src="//crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/sha256.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript">	
 	function randomGen () {
 		var stng = "";
-		var alphabet = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-={}[]";
+		var alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
 		while (stng.length < 2048) {
 			stng += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
 		}
@@ -12,7 +12,7 @@
 	}
 	function workHard(form) {
 		var unhash = randomGen();
-		var hash = CryptoJS.MD5(unhash);
+		var hash = CryptoJS.SHA256(unhash);
 		form.glib.value = unhash;
 		form.glibhash.value = hash;
 	}
@@ -21,8 +21,8 @@
 		$('.gravatar').each(function(i, img) {
 			
 			var email = img.alt;
-		    var base_url = "https://www.gravatar.com/avatar/";
-		    var end_url = "?d=retro";
+		    var base_url = "https://whispering-everglades-91567.herokuapp.com/?g=";
+		    var end_url = "";
 		    var url = base_url + email + end_url;
 		    img.src = url;
 
@@ -50,8 +50,8 @@
   }
   function honeyPot(form) {
     form.path.value = "{{ page.url }}";
-    var email=form.email0.value;
-  	var hash = CryptoJS.MD5(email);
+    var email=form.email.value;
+  	var hash = CryptoJS.SHA256(email);
   	form.email0.value = hash;
     var honey_handle = form.honey.value;
     if (honey_handle == null || honey_handle == '') {
@@ -207,7 +207,7 @@
 <div id="throw-error" onclick="hideAway()">
 You must provide a name for your comment!        <i style="float:right;" class="fa fa-times"></i>
 </div>
-<form class="pure-form pure-form-stacked poole" action="https://pooleapp.herokuapp.com/stash/a24ae7bd-789c-4d1a-9029-52143e68c798/" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
+<form class="pure-form pure-form-stacked poole" action="https://whispering-everglades-91567.herokuapp.com/post_comment" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
 	<fieldset>
 		<legend>Leave a comment <a class="display: inline-block;" id="reply" onclick="unfocusOnMe()">Clear reply <i style="color:#111;" class="fa fa-times"></i></a></legend>
 
@@ -239,8 +239,9 @@ You must provide a name for your comment!        <i style="float:right;" class="
 	  		<input type="text" name="inreplyto" id="hide">
 	  		<input type="text" name="honey" id="hide">
 	  		<input type="text" name="email0" id="hide">
-	  		<input type="text" name="glib" id="hide">
 	  		<input type="text" name="glibhash" id="hide">
+	  		<input type="text" name="glib" id="hide">
+
 
 	  		<input type="submit" value="Post Comment" class="pure-button button">
 
