@@ -6,6 +6,7 @@ timezone: CET
 description: (I Think It's Going To Be A Long Long Time)
 logo: site-logo.svg
 search: true
+
 url: https://therocketeers.cr.rs
 #url: http://localhost:4000
 dev: false
