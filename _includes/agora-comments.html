@@ -21,7 +21,7 @@
 		$('.gravatar').each(function(i, img) {
 			
 			var email = img.alt;
-		    var base_url = "https://whispering-everglades-91567.herokuapp.com/?g=";
+		    var base_url = "http://localhost:8080/?g=";
 		    var end_url = "";
 		    var url = base_url + email + end_url;
 		    img.src = url;
@@ -51,8 +51,6 @@
   function honeyPot(form) {
     form.path.value = "{{ page.url }}";
     var email=form.email.value;
-  	var hash = CryptoJS.SHA256(email);
-  	form.email0.value = hash;
     var honey_handle = form.honey.value;
     if (honey_handle == null || honey_handle == '') {
     	if (validatePooleForm(form)) {
@@ -207,7 +205,7 @@
 <div id="throw-error" onclick="hideAway()">
 You must provide a name for your comment!        <i style="float:right;" class="fa fa-times"></i>
 </div>
-<form class="pure-form pure-form-stacked poole" action="https://whispering-everglades-91567.herokuapp.com/post_comment" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
+<form class="pure-form pure-form-stacked poole" action="http://localhost:8080/post_comment" method="post" name="pooleform" onsubmit="return honeyPot(this)" id="laform">		
 	<fieldset>
 		<legend>Leave a comment <a class="display: inline-block;" id="reply" onclick="unfocusOnMe()">Clear reply <i style="color:#111;" class="fa fa-times"></i></a></legend>
 
