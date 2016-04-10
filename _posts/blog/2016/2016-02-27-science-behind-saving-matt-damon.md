@@ -4,7 +4,6 @@ categories: [blog]
 share: true
 date: 2016-02-27T21:44:37+00:00
 mathjax: true
-indent: true
 title: The Science Behind Saving Matt Damon
 tags: ["The Martian", "Ridley Scott", "science of orbits", "Matt Damon"]
 ---
