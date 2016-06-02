@@ -1,6 +1,5 @@
 ---
-layout: post
-
+fuck: yes
 title: Hello George
 ---
 
